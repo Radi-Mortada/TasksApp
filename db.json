@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "radi"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "first proj",
+      "ownerIds": [1]
+    }
+  ],
+  "tasks": [
+    {
+      "id": 23,
+      "title": "first task",
+      "description": "first description",
+      "ownerIds": [1]
+    }
+  ],
+  "comments": [
+    {
+      "id": 52,
+       "text": "first comment"
+    }
+  ]
+}
