@@ -1,7 +1,10 @@
 /* eslint consistent-return:0 import/order:0 */
 
 const express = require('express');
+const jsonServer = require('json-server');
+const bodyParser = require('body-parser');
 const logger = require('./logger');
+const loginMiddleware = require('./mockApi/login-middleware');
 
 const argv = require('./argv');
 const port = require('./port');
@@ -14,8 +17,16 @@ const ngrok =
 const { resolve } = require('path');
 const app = express();
 
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+);
+app.use(bodyParser.json());
+
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
-// app.use('/api', myApi);
+app.post('/api/login', loginMiddleware);
+app.use('/api', jsonServer.router('db.json'));
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {

@@ -10,12 +10,13 @@ import React from 'react';
 import { render } from 'react-testing-library';
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
-import LoginForm from '../index';
+import { LoginForm } from '../index';
 
 describe('<LoginForm />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<LoginForm />);
+    const dispatch = jest.fn();
+    render(<LoginForm dispatch={dispatch} />);
     expect(spy).not.toHaveBeenCalled();
   });
 

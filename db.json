@@ -2,7 +2,8 @@
   "users": [
     {
       "id": 1,
-      "username": "radi"
+      "username": "radi",
+      "password": "test1"
     }
   ],
   "projects": [
@@ -23,7 +24,7 @@
   "comments": [
     {
       "id": 52,
-       "text": "first comment"
+      "text": "first comment"
     }
   ]
 }

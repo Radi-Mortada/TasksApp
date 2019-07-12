@@ -7,16 +7,27 @@
  *
  */
 
-import React from 'react';
+import React, { memo } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
 
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import { useInjectReducer } from 'utils/injectReducer';
 import Page from 'components/Page';
+import reducers from './reducers';
 
 import GlobalStyle from '../../global-styles';
 
-export default function App() {
+const App = () => {
+  useInjectReducer({
+    key: 'app',
+    reducer: reducers,
+  });
+
   return (
     <Page>
       <Switch>
@@ -26,4 +37,20 @@ export default function App() {
       <GlobalStyle />
     </Page>
   );
-}
+};
+
+App.propTypes = {};
+
+const mapStateToProps = createStructuredSelector({});
+
+const mapDispatchToProps = {};
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  memo,
+)(App);
