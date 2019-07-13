@@ -6,7 +6,7 @@ import { loginSuccess, loginError } from './actions';
 
 /**
  * Handles user login `API` request.
- * @typedef {{username: string, password: string}} Payload
+ * @typedef {{email: string, password: string}} Payload
  * @typedef {{payload: Payload, type: string}} Event
  * @param {Event} event
  */

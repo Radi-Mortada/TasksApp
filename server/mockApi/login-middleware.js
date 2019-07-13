@@ -1,21 +1,19 @@
 // login-middleware.js
-const DB = require('../../db.json');
-
-const { users } = DB;
 
 module.exports = (req, res) => {
   const { body } = req;
+  // eslint-disable-next-line
+  const DB = require('../../db.json');
 
-  const { username, password } = body;
-  const existingUser = users.find(dbUser => dbUser.username === username);
+  const { users } = DB;
+
+  const { email, password } = body;
+  const existingUser = users.find(dbUser => dbUser.email === email);
 
   if (existingUser) {
-    if (
-      existingUser.username === username &&
-      existingUser.password === password
-    )
+    if (existingUser.email === email && existingUser.password === password)
       return res.status(200).json(existingUser);
   }
-  res.statusMessage = 'wrong `username` or `password`';
+  res.statusMessage = 'wrong `email` or `password`';
   return res.status(400).end();
 };

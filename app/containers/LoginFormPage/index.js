@@ -1,6 +1,6 @@
 /**
  *
- * LoginForm
+ * LoginFormPage
  *
  */
 
@@ -10,11 +10,13 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Formik } from 'formik';
+import styled from 'styled-components';
 
 import Form, { Input, FormGroup, ErrorMessage } from 'components/Form';
 import LoadingIndicator from 'components/LoadingIndicator';
 import Page from 'components/Page';
 import StyledButton from 'components/Button/StyledButton';
+import StyledLinkButton from 'components/Button/StyledLinkButton';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import {
@@ -25,7 +27,11 @@ import reducer from './reducer';
 import saga from './saga';
 import { loginInvoked } from './actions';
 
-export function LoginForm(props) {
+const ButtonsWrapper = styled.div`
+  display: flex;
+`;
+
+export function LoginFormPage(props) {
   useInjectReducer({ key: 'loginForm', reducer });
   useInjectSaga({ key: 'loginForm', saga });
 
@@ -36,12 +42,12 @@ export function LoginForm(props) {
       <h1>Login</h1>
       <Formik
         initialValues={{
-          username: '',
+          email: '',
           password: '',
         }}
         onSubmit={values => {
-          const { username, password } = values;
-          onLoginSubmit(username, password);
+          const { email, password } = values;
+          onLoginSubmit(email, password);
         }}
         render={({ handleChange, handleBlur, values }) => (
           <Form>
@@ -50,8 +56,9 @@ export function LoginForm(props) {
                 type="text"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.username}
-                name="username"
+                value={values.email}
+                placeholder="example@domain.com"
+                name="email"
               />
             </FormGroup>
 
@@ -61,17 +68,23 @@ export function LoginForm(props) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.password}
+                placeholder="password"
                 name="password"
               />
             </FormGroup>
+            <ButtonsWrapper>
+              <FormGroup>
+                {isLoading ? (
+                  <LoadingIndicator />
+                ) : (
+                  <StyledButton type="submit">Submit</StyledButton>
+                )}
+              </FormGroup>
 
-            <FormGroup>
-              {isLoading ? (
-                <LoadingIndicator />
-              ) : (
-                <StyledButton type="submit">Submit</StyledButton>
-              )}
-            </FormGroup>
+              <FormGroup>
+                <StyledLinkButton to="/signup">Signup</StyledLinkButton>
+              </FormGroup>
+            </ButtonsWrapper>
             {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           </Form>
         )}
@@ -80,7 +93,7 @@ export function LoginForm(props) {
   );
 }
 
-LoginForm.propTypes = {
+LoginFormPage.propTypes = {
   onLoginSubmit: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   errorMessage: PropTypes.string,
@@ -103,4 +116,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(LoginForm);
+)(LoginFormPage);

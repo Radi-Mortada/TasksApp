@@ -1,10 +1,10 @@
 /*
  *
- * LoginForm reducer
+ * LoginFormPage reducer
  *
  */
 import produce from 'immer';
-import { LOGIN_INVOKED, LOGIN_SUCCESS, LOGIN_ERROR } from './constants';
+import { SIGNUP_INVOKED, SIGNUP_SUCCESS, SIGNUP_ERROR } from './constants';
 
 export const initialState = {
   isLoading: false,
@@ -15,18 +15,18 @@ export const initialState = {
 const loginFormReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case LOGIN_INVOKED: {
+      case SIGNUP_INVOKED: {
         draft.isLoading = true;
 
         return draft;
       }
-      case LOGIN_SUCCESS: {
+      case SIGNUP_SUCCESS: {
         draft.isLoading = false;
         draft.errorMessage = undefined;
 
         return draft;
       }
-      case LOGIN_ERROR: {
+      case SIGNUP_ERROR: {
         const {
           payload: { errorMessage },
         } = action;

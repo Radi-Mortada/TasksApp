@@ -13,6 +13,9 @@ const Input = styled.input`
   height: 3rem;
   color: darkblue;
   padding: 0.5rem;
+  &::placeholder {
+    color: grey;
+  }
 `;
 
 Input.propTypes = {};

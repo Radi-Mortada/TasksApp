@@ -9,29 +9,33 @@
 
 import React, { memo } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import HomePage from 'containers/HomePage/Loadable';
+import LoginFormPage from 'containers/LoginFormPage';
+import SignupFormPage from 'containers/SignupFormPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import PrivateRoute from 'containers/PrivateRoute';
 import { useInjectReducer } from 'utils/injectReducer';
 import Page from 'components/Page';
-import reducers from './reducers';
+import Header from 'components/Header';
+import reducer from './reducer';
 
 import GlobalStyle from '../../global-styles';
 
 const App = () => {
   useInjectReducer({
     key: 'app',
-    reducer: reducers,
+    reducer,
   });
 
   return (
     <Page>
+      <Header />
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <PrivateRoute exact path="/" component={HomePage} />
+        <Route exact path="/login" component={LoginFormPage} />
+        <Route exact path="/signup" component={SignupFormPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
@@ -41,16 +45,4 @@ const App = () => {
 
 App.propTypes = {};
 
-const mapStateToProps = createStructuredSelector({});
-
-const mapDispatchToProps = {};
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-export default compose(
-  withConnect,
-  memo,
-)(App);
+export default compose(memo)(App);

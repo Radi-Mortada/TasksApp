@@ -1,6 +1,6 @@
 /**
  *
- * Tests for LoginForm
+ * Tests for LoginFormPage
  *
  * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
  *
@@ -10,13 +10,13 @@ import React from 'react';
 import { render } from 'react-testing-library';
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
-import { LoginForm } from '../index';
+import { LoginFormPage } from '../index';
 
-describe('<LoginForm />', () => {
+describe('<LoginFormPage />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     const dispatch = jest.fn();
-    render(<LoginForm dispatch={dispatch} />);
+    render(<LoginFormPage dispatch={dispatch} />);
     expect(spy).not.toHaveBeenCalled();
   });
 
@@ -32,7 +32,7 @@ describe('<LoginForm />', () => {
   it.skip('Should render and match the snapshot', () => {
     const {
       container: { firstChild },
-    } = render(<LoginForm />);
+    } = render(<LoginFormPage />);
     expect(firstChild).toMatchSnapshot();
   });
 });

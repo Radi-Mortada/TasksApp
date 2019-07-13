@@ -6,12 +6,7 @@
  */
 
 import React from 'react';
-import LoginForm from 'containers/LoginForm';
 
-const HomePage = () => (
-  <div>
-    <LoginForm />
-  </div>
-);
+const HomePage = () => <div>HomePage</div>;
 
 export default HomePage;

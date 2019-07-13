@@ -1,14 +1,14 @@
 /*
  *
- * App reducers
+ * App reducer
  *
  */
 import produce from 'immer';
 import { combineReducers } from 'redux';
-import { LOGIN_SUCCESS } from 'containers/LoginForm/constants';
+import { LOGIN_SUCCESS } from 'containers/LoginFormPage/constants';
 
 export const userInitialState = {
-  user: undefined,
+  info: undefined,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -19,7 +19,7 @@ const userReducer = (state = userInitialState, action) =>
         const {
           payload: { user },
         } = action;
-        draft.user = user;
+        draft.info = user;
         return draft;
       }
       default:

@@ -5,6 +5,7 @@ const jsonServer = require('json-server');
 const bodyParser = require('body-parser');
 const logger = require('./logger');
 const loginMiddleware = require('./mockApi/login-middleware');
+const signupMiddleware = require('./mockApi/signup-middleware');
 
 const argv = require('./argv');
 const port = require('./port');
@@ -26,6 +27,7 @@ app.use(bodyParser.json());
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 app.post('/api/login', loginMiddleware);
+app.post('/api/users', signupMiddleware);
 app.use('/api', jsonServer.router('db.json'));
 
 // In production we need to pass these values in instead of relying on webpack

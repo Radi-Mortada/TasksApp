@@ -23,7 +23,7 @@ const makeSelectLoginFormErrorMessage = () =>
   );
 
 /**
- * Default selector used by LoginForm
+ * Default selector used by LoginFormPage
  */
 
 const makeSelectLoginForm = () =>
