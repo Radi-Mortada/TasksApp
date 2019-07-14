@@ -10,11 +10,11 @@ import {
   CREATE_PROJECT_ERROR,
 } from './constants';
 
-export function createProjectInvoked(name) {
+export function createProjectInvoked(formValues) {
   return {
     type: CREATE_PROJECT_INVOKED,
     payload: {
-      name,
+      formValues,
     },
   };
 }

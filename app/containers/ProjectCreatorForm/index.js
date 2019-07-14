@@ -29,20 +29,21 @@ export function CreateProjectForm(props) {
   useInjectReducer({ key: 'projectCreatorForm', reducer });
   useInjectSaga({ key: 'projectCreatorForm', saga });
 
-  const { onSubmit, isLoading, errorMessage } = props;
+  const { onSubmit, isLoading, errorMessage, initialValues } = props;
 
   return (
     <Page>
-      <h1>CreateProject</h1>
+      {!initialValues && <h1>Create project</h1>}
       <Formik
+        enableReinitialize
         initialValues={{
           name: '',
+          ...initialValues,
         }}
         onSubmit={values => {
-          const { name } = values;
-          onSubmit(name);
+          onSubmit(values);
         }}
-        render={({ handleChange, handleBlur, values }) => (
+        render={({ handleChange, handleBlur, values, dirty }) => (
           <Form>
             <FormGroup>
               <Input
@@ -55,14 +56,15 @@ export function CreateProjectForm(props) {
               />
             </FormGroup>
 
-            <FormGroup>
-              {isLoading ? (
-                <LoadingIndicator />
-              ) : (
-                <StyledButton type="submit">Submit</StyledButton>
-              )}
-            </FormGroup>
-
+            {dirty && (
+              <FormGroup>
+                {isLoading ? (
+                  <LoadingIndicator />
+                ) : (
+                  <StyledButton type="submit">Submit</StyledButton>
+                )}
+              </FormGroup>
+            )}
             {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           </Form>
         )}
@@ -75,6 +77,7 @@ CreateProjectForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   errorMessage: PropTypes.string,
+  initialValues: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

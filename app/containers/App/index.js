@@ -12,6 +12,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
 import LoginFormPage from 'containers/LoginFormPage';
+import ProjectPage from 'containers/ProjectPage/Loadable';
 import SignupFormPage from 'containers/SignupFormPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import PrivateRoute from 'containers/PrivateRoute';
@@ -27,6 +28,7 @@ const App = () => (
       <PrivateRoute exact path="/" component={HomePage} />
       <Route exact path="/login" component={LoginFormPage} />
       <Route exact path="/signup" component={SignupFormPage} />
+      <PrivateRoute exact path="/project/:id" component={ProjectPage} />
       <Route component={NotFoundPage} />
     </Switch>
     <GlobalStyle />

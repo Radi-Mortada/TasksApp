@@ -14,22 +14,27 @@ import { createProjectSuccess, createProjectError } from './actions';
  */
 function* handleCreateProjectInvoked(event) {
   const {
-    payload: { name },
+    payload: { formValues },
   } = event;
+
+  const { id: projectId } = formValues;
 
   try {
     const { id } = yield select(makeSelectUser());
 
     const body = {
       adminId: id,
-      name,
+      ...formValues,
     };
 
-    const requestOptions = { method: 'POST', body: JSON.stringify(body) };
+    const requestOptions = {
+      method: projectId ? 'PUT' : 'POST',
+      body: JSON.stringify(body),
+    };
 
     const createProjectResponse = yield call(
       request,
-      `${REQUEST_URL}/projects`,
+      `${REQUEST_URL}/projects${projectId ? `/${projectId}` : ''}`,
       requestOptions,
     );
 

@@ -12,8 +12,6 @@ import { loadProjectsSuccess, loadProjectsError } from './actions';
  */
 function* loadProjects() {
   try {
-    // const requestOptions = { method: 'GET', body: JSON.stringify(payload) };
-
     const projectsResponse = yield call(request, `${REQUEST_URL}/projects`);
 
     yield put(loadProjectsSuccess(projectsResponse));

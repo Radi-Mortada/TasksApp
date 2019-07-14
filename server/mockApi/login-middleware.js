@@ -1,11 +1,13 @@
-// login-middleware.js
+// signup-middleware.js
+const fs = require('fs');
+const { db: dbPath } = require('../paths');
 
 module.exports = (req, res) => {
   const { body } = req;
-  // eslint-disable-next-line
-  const DB = require('../../db.json');
 
-  const { users } = DB;
+  const DB = fs.readFileSync(dbPath);
+
+  const { users } = JSON.parse(DB);
 
   const { email, password } = body;
   const existingUser = users.find(dbUser => dbUser.email === email);

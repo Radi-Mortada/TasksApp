@@ -4,22 +4,82 @@
       "id": 1,
       "email": "radi@example.com",
       "password": "test1"
+    },
+    {
+      "email": "radi2@example.com",
+      "password": "test1",
+      "id": 2
+    },
+    {
+      "email": "radi4@example.com",
+      "password": "test1",
+      "id": 3
     }
   ],
   "projects": [
     {
-      "id": 1,
-      "name": "first proj",
-      "adminId": 1
+      "adminId": 1,
+      "name": "First Proj",
+      "id": 1
+    },
+    {
+      "adminId": 1,
+      "name": "second proj",
+      "id": 2
+    },
+    {
+      "adminId": 1,
+      "name": "proj",
+      "id": 3
+    },
+    {
+      "adminId": 1,
+      "name": "blah",
+      "id": 4
+    },
+    {
+      "adminId": 1,
+      "name": "blaha",
+      "id": 5
+    },
+    {
+      "adminId": 3,
+      "name": "new proj for another user",
+      "id": 6
     }
   ],
   "tasks": [
     {
       "id": 23,
-      "title": "first task",
-      "description": "first description",
+      "title": "first task in doing",
+      "description": "first description in doing",
       "ownerId": 1,
-      "done": false
+      "done": false,
+      "projectId": 1
+    },
+    {
+      "id": 20,
+      "title": "second task in doing",
+      "description": "first description in doing",
+      "ownerId": 1,
+      "done": false,
+      "projectId": 1
+    },
+    {
+      "id": 22,
+      "title": "first task in done",
+      "description": "first description in done",
+      "ownerId": 1,
+      "done": true,
+      "projectId": 1
+    },
+    {
+      "id": 25,
+      "title": "second task",
+      "description": "second description",
+      "ownerId": 1,
+      "done": true,
+      "projectId": 2
     }
   ],
   "comments": [
