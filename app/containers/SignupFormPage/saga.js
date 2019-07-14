@@ -8,9 +8,10 @@ import { signupSuccess, signupError } from './actions';
  * Handles user signup `API` request.
  * @typedef {{email: string, password: string}} Payload
  * @typedef {{payload: Payload, type: string}} Event
+ * @param {Object} routerHistory
  * @param {Event} event
  */
-function* handleLoginInvoked(event) {
+function* handleSignupInvoked(routerHistory, event) {
   const { payload } = event;
 
   try {
@@ -23,11 +24,17 @@ function* handleLoginInvoked(event) {
     );
 
     yield put(signupSuccess(signupResponse));
+    routerHistory.push('/');
   } catch (error) {
     yield put(signupError(error.message));
   }
 }
 
-export default function* signupFormSaga() {
-  yield all([takeLatest(SIGNUP_INVOKED, handleLoginInvoked)]);
+export default function* signupFormSaga(routerHistory) {
+  const boundedHandleSignupInvoked = handleSignupInvoked.bind(
+    null,
+    routerHistory,
+  );
+
+  yield all([takeLatest(SIGNUP_INVOKED, boundedHandleSignupInvoked)]);
 }

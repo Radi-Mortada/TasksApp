@@ -8,9 +8,10 @@ import { loginSuccess, loginError } from './actions';
  * Handles user login `API` request.
  * @typedef {{email: string, password: string}} Payload
  * @typedef {{payload: Payload, type: string}} Event
+ * @param {Object} routerHistory
  * @param {Event} event
  */
-function* handleLoginInvoked(event) {
+function* handleLoginInvoked(routerHistory, event) {
   const { payload } = event;
 
   try {
@@ -23,11 +24,17 @@ function* handleLoginInvoked(event) {
     );
 
     yield put(loginSuccess(loginResponse));
+    routerHistory.push('/');
   } catch (error) {
     yield put(loginError(error.message));
   }
 }
 
-export default function* loginFormSaga() {
-  yield all([takeLatest(LOGIN_INVOKED, handleLoginInvoked)]);
+export default function* loginFormSaga(routerHistory) {
+  const boundedHandleLoginInvoked = handleLoginInvoked.bind(
+    null,
+    routerHistory,
+  );
+
+  yield all([takeLatest(LOGIN_INVOKED, boundedHandleLoginInvoked)]);
 }

@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
-const selectRouter = state => state && state.router;
-const selectAppState = state => state && state.app;
+const selectRouter = state => state.router;
+const selectAppState = state => state.app;
 
 const makeSelectLocation = () =>
   createSelector(
@@ -12,12 +12,13 @@ const makeSelectLocation = () =>
 const makeSelectUser = () =>
   createSelector(
     selectAppState,
-    appState => {
-      if (!appState) {
-        return undefined;
-      }
-      return appState.user.info;
-    },
+    appState => appState.user.data,
   );
 
-export { makeSelectLocation, makeSelectUser };
+const makeSelectAllProjects = () =>
+  createSelector(
+    selectAppState,
+    appState => appState.projects.data,
+  );
+
+export { makeSelectLocation, makeSelectUser, makeSelectAllProjects };

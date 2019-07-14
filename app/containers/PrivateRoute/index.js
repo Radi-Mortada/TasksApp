@@ -23,7 +23,11 @@ const PrivateRoute = ({ component: Component, user, ...rest }) => (
 
 PrivateRoute.propTypes = {
   user: PropTypes.object,
-  component: PropTypes.func,
+  component: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.node,
+    PropTypes.object,
+  ]),
 };
 
 const mapStateToProps = createStructuredSelector({
