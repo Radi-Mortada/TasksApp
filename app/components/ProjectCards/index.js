@@ -13,7 +13,7 @@ function ProjectCards({ projects }) {
   return (
     <>
       <h1>Projects</h1>
-      <Grid columnsCount={3}>
+      <Grid columnsCount={2}>
         {projects.map(project => (
           <ProjectCard project={project} key={project.id} />
         ))}

@@ -18,8 +18,8 @@ import StyledButton from 'components/Button/StyledButton';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import {
-  makeSelectLoginFormIsLoading,
-  makeSelectLoginFormErrorMessage,
+  makeSelectProjectCreatorFormIsLoading,
+  makeSelectProjectCreatorFormErrorMessage,
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -81,8 +81,8 @@ CreateProjectForm.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  isLoading: makeSelectLoginFormIsLoading(),
-  errorMessage: makeSelectLoginFormErrorMessage(),
+  isLoading: makeSelectProjectCreatorFormIsLoading(),
+  errorMessage: makeSelectProjectCreatorFormErrorMessage(),
 });
 
 const mapDispatchToProps = {

@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Formik } from 'formik';
+import styled from 'styled-components';
 
 import Form, { Input, FormGroup, ErrorMessage } from 'components/Form';
 import LoadingIndicator from 'components/LoadingIndicator';
@@ -18,22 +19,38 @@ import StyledButton from 'components/Button/StyledButton';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import {
-  makeSelectLoginFormIsLoading,
-  makeSelectLoginFormErrorMessage,
+  makeSelectTaskCreatorFormIsLoading,
+  makeSelectTaskCreatorFormErrorMessage,
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { createTaskInvoked } from './actions';
 
+const CheckBoxWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export function CreateTaskForm(props) {
   useInjectReducer({ key: 'taskCreatorForm', reducer });
   useInjectSaga({ key: 'taskCreatorForm', saga });
 
-  const { onSubmit, isLoading, errorMessage, initialValues } = props;
+  const {
+    onSubmit,
+    isLoading,
+    errorMessage,
+    initialValues,
+    fieldsDisabled,
+  } = props;
 
   return (
     <Page>
-      <h1>Create task</h1>
+      <h1>
+        {initialValues && initialValues.title
+          ? initialValues.title
+          : 'Create task'}
+      </h1>
       <Formik
         enableReinitialize
         initialValues={{
@@ -55,6 +72,7 @@ export function CreateTaskForm(props) {
                 value={values.title}
                 placeholder="my task title"
                 name="title"
+                disabled={fieldsDisabled}
               />
             </FormGroup>
 
@@ -66,9 +84,21 @@ export function CreateTaskForm(props) {
                 value={values.description}
                 placeholder="my task description"
                 name="description"
+                disabled={fieldsDisabled}
               />
             </FormGroup>
-
+            <CheckBoxWrapper>
+              <label htmlFor="done">done: </label>
+              <Input
+                type="checkbox"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.done}
+                checked={values.done}
+                name="done"
+                disabled={fieldsDisabled}
+              />
+            </CheckBoxWrapper>
             {dirty && (
               <FormGroup>
                 {isLoading ? (
@@ -91,11 +121,12 @@ CreateTaskForm.propTypes = {
   isLoading: PropTypes.bool,
   errorMessage: PropTypes.string,
   initialValues: PropTypes.object,
+  fieldsDisabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
-  isLoading: makeSelectLoginFormIsLoading(),
-  errorMessage: makeSelectLoginFormErrorMessage(),
+  isLoading: makeSelectTaskCreatorFormIsLoading(),
+  errorMessage: makeSelectTaskCreatorFormErrorMessage(),
 });
 
 const mapDispatchToProps = {

@@ -46,23 +46,38 @@
       "adminId": 3,
       "name": "new proj for another user",
       "id": 6
+    },
+    {
+      "adminId": 1,
+      "name": "ooooo",
+      "id": 7
+    },
+    {
+      "adminId": 1,
+      "name": "sadsad",
+      "id": 8
+    },
+    {
+      "adminId": 1,
+      "name": "asdasd",
+      "id": 9
     }
   ],
   "tasks": [
     {
-      "id": 23,
+      "ownerId": 1,
       "title": "first task in doing",
       "description": "first description in doing",
-      "ownerId": 1,
-      "done": false,
+      "done": true,
+      "id": 23,
       "projectId": 1
     },
     {
-      "id": 20,
+      "ownerId": 1,
       "title": "second task in doing",
       "description": "first description in doing",
-      "ownerId": 1,
-      "done": false,
+      "done": true,
+      "id": 20,
       "projectId": 1
     },
     {
@@ -154,6 +169,46 @@
       "done": false,
       "projectId": "1",
       "id": 35
+    },
+    {
+      "ownerId": 1,
+      "title": "",
+      "description": "",
+      "done": true,
+      "projectId": "1",
+      "id": 36
+    },
+    {
+      "ownerId": 1,
+      "title": "asdsad",
+      "description": "sadasdas",
+      "done": true,
+      "projectId": "1",
+      "id": 37
+    },
+    {
+      "ownerId": 1,
+      "title": "sadsad",
+      "description": "sadasdas",
+      "done": false,
+      "projectId": "1",
+      "id": 38
+    },
+    {
+      "ownerId": 1,
+      "title": "sadsad",
+      "description": "asdsad",
+      "done": true,
+      "projectId": "1",
+      "id": 39
+    },
+    {
+      "ownerId": 1,
+      "title": "jasbdjsa",
+      "description": "sadnasd",
+      "done": true,
+      "projectId": "6",
+      "id": 40
     }
   ],
   "comments": [

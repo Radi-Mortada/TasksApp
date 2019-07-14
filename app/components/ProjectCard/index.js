@@ -15,7 +15,7 @@ const Wrapper = styled(Link)`
   justify-content: center;
   border: 1px papayawhip solid;
   border-radius: 6px;
-  min-width: 20rem;
+  min-width: 15rem;
   padding: 1rem;
   background-color: darkCyan;
   text-decoration: none;

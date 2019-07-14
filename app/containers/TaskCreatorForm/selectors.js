@@ -2,39 +2,47 @@ import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
 /**
- * Direct selector to the loginForm state domain
+ * Direct selector to the taskCreatorForm state domain
  */
 
-const selectLoginFormDomain = state => state.loginForm || initialState;
+const selectTaskCreatorFormDomain = state =>
+  state.taskCreatorForm || initialState;
 
 /**
  * Other specific selectors
  */
-const makeSelectLoginFormIsLoading = () =>
+const makeSelectTaskCreatorFormIsLoading = () =>
   createSelector(
-    selectLoginFormDomain,
+    selectTaskCreatorFormDomain,
     substate => substate.isLoading,
   );
 
-const makeSelectLoginFormErrorMessage = () =>
+const makeSelectTaskCreatorFormErrorMessage = () =>
   createSelector(
-    selectLoginFormDomain,
+    selectTaskCreatorFormDomain,
     substate => substate.errorMessage,
   );
 
+const makeSelectIsUpdated = () =>
+  createSelector(
+    selectTaskCreatorFormDomain,
+    substate => substate.isUpdated,
+  );
+
 /**
- * Default selector used by LoginFormPage
+ * Default selector used by TaskCreatorFormPage
  */
 
-const makeSelectLoginForm = () =>
+const makeSelectTaskCreatorForm = () =>
   createSelector(
-    selectLoginFormDomain,
+    selectTaskCreatorFormDomain,
     substate => substate,
   );
 
-export default makeSelectLoginForm;
+export default makeSelectTaskCreatorForm;
 export {
-  selectLoginFormDomain,
-  makeSelectLoginFormIsLoading,
-  makeSelectLoginFormErrorMessage,
+  selectTaskCreatorFormDomain,
+  makeSelectTaskCreatorFormIsLoading,
+  makeSelectTaskCreatorFormErrorMessage,
+  makeSelectIsUpdated,
 };

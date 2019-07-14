@@ -2,39 +2,40 @@ import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
 /**
- * Direct selector to the loginForm state domain
+ * Direct selector to the projectCreatorForm state domain
  */
 
-const selectLoginFormDomain = state => state.loginForm || initialState;
+const selectProjectCreatorFormDomain = state =>
+  state.projectCreatorForm || initialState;
 
 /**
  * Other specific selectors
  */
-const makeSelectLoginFormIsLoading = () =>
+const makeSelectProjectCreatorFormIsLoading = () =>
   createSelector(
-    selectLoginFormDomain,
+    selectProjectCreatorFormDomain,
     substate => substate.isLoading,
   );
 
-const makeSelectLoginFormErrorMessage = () =>
+const makeSelectProjectCreatorFormErrorMessage = () =>
   createSelector(
-    selectLoginFormDomain,
+    selectProjectCreatorFormDomain,
     substate => substate.errorMessage,
   );
 
 /**
- * Default selector used by LoginFormPage
+ * Default selector used by ProjectCreatorFormPage
  */
 
-const makeSelectLoginForm = () =>
+const makeSelectProjectCreatorForm = () =>
   createSelector(
-    selectLoginFormDomain,
+    selectProjectCreatorFormDomain,
     substate => substate,
   );
 
-export default makeSelectLoginForm;
+export default makeSelectProjectCreatorForm;
 export {
-  selectLoginFormDomain,
-  makeSelectLoginFormIsLoading,
-  makeSelectLoginFormErrorMessage,
+  selectProjectCreatorFormDomain,
+  makeSelectProjectCreatorFormIsLoading,
+  makeSelectProjectCreatorFormErrorMessage,
 };

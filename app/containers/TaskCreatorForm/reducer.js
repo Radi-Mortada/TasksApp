@@ -13,6 +13,7 @@ import {
 export const initialState = {
   isLoading: false,
   errorMessage: undefined,
+  isUpdated: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -21,12 +22,14 @@ const taskCreatorReducer = (state = initialState, action) =>
     switch (action.type) {
       case CREATE_TASK_INVOKED: {
         draft.isLoading = true;
+        draft.isUpdated = false;
 
         return draft;
       }
       case CREATE_TASK_SUCCESS: {
         draft.isLoading = false;
         draft.errorMessage = undefined;
+        draft.isUpdated = true;
 
         return draft;
       }
@@ -37,6 +40,7 @@ const taskCreatorReducer = (state = initialState, action) =>
 
         draft.isLoading = false;
         draft.errorMessage = errorMessage;
+        draft.isUpdated = false;
 
         return draft;
       }
