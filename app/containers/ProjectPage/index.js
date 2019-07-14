@@ -15,9 +15,10 @@ import styled from 'styled-components';
 import { RESTART_ON_REMOUNT } from 'utils/constants';
 import { makeSelectLocation } from 'containers/App/selectors';
 import ProjectCreatorForm from 'containers/ProjectCreatorForm';
+import TaskCreatorForm from 'containers/TaskCreatorForm';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import TaskCardsSection from 'components/TaskCardsSection/Loadable';
+import TaskCardsSection from 'components/TaskCardsSection';
 import {
   makeSelectCurrentProjectTasksInDoing,
   makeSelectCurrentProjectTasksInDone,
@@ -45,11 +46,11 @@ export function ProjectPage({
   useInjectReducer({ key: 'projectPage', reducer });
   useInjectSaga({ key: 'projectPage', saga, mode: RESTART_ON_REMOUNT });
 
-  useEffect(() => {
-    const { pathname } = location;
-    const parts = pathname.split('/');
-    const projectId = parts.pop();
+  const { pathname } = location;
+  const parts = pathname.split('/');
+  const projectId = parts.pop();
 
+  useEffect(() => {
     loadTasks(projectId);
   }, [location]);
 
@@ -59,7 +60,11 @@ export function ProjectPage({
         <title>ProjectPage</title>
         <meta name="description" content="Description of ProjectPage" />
       </Helmet>
-      {isAdmin && project && <ProjectCreatorForm initialValues={project} />}
+      <SectionsWrapper>
+        <TaskCreatorForm initialValues={{ projectId }} />
+        {isAdmin && project && <ProjectCreatorForm initialValues={project} />}
+      </SectionsWrapper>
+
       <SectionsWrapper>
         {tasksInDoing && (
           <TaskCardsSection title="Doing" tasks={tasksInDoing} />

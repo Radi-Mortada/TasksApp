@@ -8,9 +8,6 @@ import { createProjectSuccess, createProjectError } from './actions';
 
 /**
  * Handles user createProject `API` request.
- * @typedef {{email: string, password: string}} Payload
- * @typedef {{payload: Payload, type: string}} Event
- * @param {Event} event
  */
 function* handleCreateProjectInvoked(event) {
   const {
@@ -45,6 +42,6 @@ function* handleCreateProjectInvoked(event) {
   }
 }
 
-export default function* loginFormSaga() {
+export default function* projectCreatorSaga() {
   yield all([takeLatest(CREATE_PROJECT_INVOKED, handleCreateProjectInvoked)]);
 }

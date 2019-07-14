@@ -1,13 +1,13 @@
 /*
  *
- * ProjectCreatorForm reducer
+ * TaskCreatorForm reducer
  *
  */
 import produce from 'immer';
 import {
-  CREATE_PROJECT_INVOKED,
-  CREATE_PROJECT_SUCCESS,
-  CREATE_PROJECT_ERROR,
+  CREATE_TASK_INVOKED,
+  CREATE_TASK_SUCCESS,
+  CREATE_TASK_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -16,21 +16,21 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const projectCreatorReducer = (state = initialState, action) =>
+const taskCreatorReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case CREATE_PROJECT_INVOKED: {
+      case CREATE_TASK_INVOKED: {
         draft.isLoading = true;
 
         return draft;
       }
-      case CREATE_PROJECT_SUCCESS: {
+      case CREATE_TASK_SUCCESS: {
         draft.isLoading = false;
         draft.errorMessage = undefined;
 
         return draft;
       }
-      case CREATE_PROJECT_ERROR: {
+      case CREATE_TASK_ERROR: {
         const {
           payload: { errorMessage },
         } = action;
@@ -45,4 +45,4 @@ const projectCreatorReducer = (state = initialState, action) =>
     }
   });
 
-export default projectCreatorReducer;
+export default taskCreatorReducer;

@@ -1,5 +1,4 @@
 import { call, all, put, takeLatest, select } from 'redux-saga/effects';
-import { LOCATION_CHANGE } from 'connected-react-router';
 
 import {
   makeSelectUser,
@@ -25,7 +24,7 @@ function* loadTasks(event) {
 
     const loadedProjects = yield select(makeSelectAllProjects());
     const currentProject = loadedProjects.find(
-      project => project.id === Number(projectId),
+      project => Number(project.id) === Number(projectId),
     );
 
     const { id: userId } = yield select(makeSelectUser());
@@ -40,5 +39,4 @@ function* loadTasks(event) {
 
 export default function* projectPageSaga() {
   yield all([takeLatest(LOAD_TASKS_INVOKED, loadTasks)]);
-  yield all([takeLatest(LOCATION_CHANGE, loadTasks)]);
 }
